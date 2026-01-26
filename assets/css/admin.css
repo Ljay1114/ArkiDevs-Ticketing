@@ -1,0 +1,534 @@
+/**
+ * Admin dashboard styles
+ */
+
+.arkidevs-support-admin,
+.arkidevs-support-agent {
+    max-width: 1200px;
+}
+
+/* Button loading/disabled states */
+.button-disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+}
+
+.button-disabled:hover {
+    opacity: 0.6 !important;
+}
+
+.arkidevs-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.stat-box {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+}
+
+.stat-box h3 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+}
+
+.stat-box .stat-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2271b1;
+    margin: 0;
+}
+
+.arkidevs-tabs {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    border-bottom: 1px solid #ccd0d4;
+}
+
+.arkidevs-tabs .tab {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #2271b1;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+}
+
+.arkidevs-tabs .tab:hover {
+    color: #135e96;
+}
+
+.arkidevs-tabs .tab.active {
+    border-bottom-color: #2271b1;
+    font-weight: 600;
+}
+
+.arkidevs-tickets-list {
+    margin: 20px 0;
+}
+
+.arkidevs-ticket-item {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.arkidevs-ticket-item .ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.arkidevs-ticket-item .ticket-header h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.arkidevs-ticket-item .ticket-header a {
+    text-decoration: none;
+    color: #2271b1;
+}
+
+.arkidevs-ticket-item .ticket-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 13px;
+    color: #666;
+}
+
+.ticket-actions {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.ticket-actions select,
+.ticket-actions button {
+    padding: 6px 12px;
+}
+
+.agent-badge {
+    background: #e7f5e7;
+    color: #2c5f2c;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 13px;
+    margin-left: 10px;
+}
+
+.agent-badge.unassigned {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.ticket-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.unassigned-text {
+    color: #856404;
+    font-style: italic;
+}
+
+.time-tracking {
+    background: #f0f0f1;
+    padding: 15px;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+.ticket-description {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.ticket-audit {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.arkidevs-audit-table code {
+    font-size: 12px;
+}
+
+.arkidevs-audit-old {
+    color: #8a1f11;
+}
+
+.arkidevs-audit-new {
+    color: #135e96;
+    font-weight: 600;
+}
+
+.arkidevs-audit-arrow {
+    display: inline-block;
+    margin: 0 6px;
+    color: #666;
+}
+
+.arkidevs-audit-details summary {
+    cursor: pointer;
+    color: #2271b1;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.arkidevs-audit-details summary:hover {
+    color: #135e96;
+}
+
+.arkidevs-audit-full {
+    margin-top: 6px;
+    padding: 8px 10px;
+    background: #f9f9f9;
+    border: 1px solid #e2e2e2;
+    border-radius: 3px;
+    line-height: 1.4;
+}
+
+.ticket-related {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.arkidevs-related-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+.arkidevs-related-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f1;
+}
+
+.arkidevs-related-list li:last-child {
+    border-bottom: none;
+}
+
+.arkidevs-related-list a {
+    color: #2271b1;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.arkidevs-related-list .button-link.remove-related-ticket {
+    color: #d63638;
+    margin-left: auto;
+}
+
+.ticket-description h3 {
+    margin-top: 0;
+}
+
+.description-content {
+    margin-top: 15px;
+}
+
+.ticket-edit {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.ticket-edit h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.ticket-edit label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.ticket-edit input,
+.ticket-edit textarea {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.ticket-edit p {
+    margin-bottom: 15px;
+}
+
+.ticket-replies {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.ticket-replies h3 {
+    margin-top: 0;
+}
+
+.reply-item {
+    border-bottom: 1px solid #f0f0f1;
+    padding: 15px 0;
+    position: relative;
+}
+
+.reply-item.reply-nested {
+    margin-left: 40px;
+    padding-left: 20px;
+    border-left: 2px solid #e0e0e0;
+    margin-top: 10px;
+}
+
+.reply-item:last-child {
+    border-bottom: none;
+}
+
+.reply-thread-line {
+    position: absolute;
+    left: -2px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e0e0e0;
+}
+
+.reply-children {
+    margin-top: 15px;
+    margin-left: 0;
+}
+
+/* Timer indicator styles */
+.timer-indicator {
+    display: inline-block;
+    position: relative;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.timer-icon {
+    display: inline-block;
+    font-size: 16px;
+    color: #2271b1;
+    animation: timer-pulse 2s ease-in-out infinite;
+}
+
+.timer-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(34, 113, 177, 0.3);
+    animation: timer-pulse-ring 2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes timer-pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes timer-pulse-ring {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+.arkidevs-ticket-item.has-active-timer {
+    border-left: 3px solid #2271b1;
+    padding-left: 10px;
+}
+
+/* SLA warning styles */
+.arkidevs-ticket-item.sla-overdue {
+    border-left: 3px solid #dc3232;
+    background-color: #fff5f5;
+}
+
+.sla-warning {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 6px;
+    background: #dc3232;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: bold;
+    animation: sla-blink 2s ease-in-out infinite;
+}
+
+@keyframes sla-blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.reply-hidden-replies {
+    margin-top: 10px;
+}
+
+.view-replies-toggle {
+    margin-top: 10px;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.view-replies-toggle .button-link {
+    color: #2271b1;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 5px 0;
+    cursor: pointer;
+    background: none;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.view-replies-toggle .button-link:hover {
+    text-decoration: underline;
+    color: #135e96;
+}
+
+.reply-author {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.reply-author strong {
+    color: #2271b1;
+}
+
+.reply-date {
+    color: #666;
+}
+
+.reply-content {
+    color: #333;
+}
+
+.reply-form {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #ccd0d4;
+}
+
+.reply-form textarea {
+    margin-bottom: 10px;
+}
+
+.reply-actions {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #555;
+}
+
+.reply-actions .button-link {
+    padding: 0;
+    border: none;
+    background: none;
+    color: #2271b1;
+    cursor: pointer;
+}
+
+.reply-actions .button-link:hover {
+    text-decoration: underline;
+}
+
+.reply-actions span {
+    margin: 0 5px;
+    color: #ccc;
+}
+
+/* Bulk ticket actions */
+.arkidevs-bulk-actions-bar {
+    background: #f9f9f9;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    padding: 8px 12px;
+}
+
+.arkidevs-ticket-select input[type="checkbox"] {
+    margin: 0;
+}
+
+/* Internal notes (agent/admin only) */
+.reply-item.reply-internal {
+    background: #fff9e5;
+    border-left: 3px solid #ffb900;
+}
+
+.reply-internal-badge {
+    background: #ffb900;
+    color: #23282d;
+    border-radius: 3px;
+    padding: 1px 6px;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+/* Red color for author name in internal notes */
+.reply-author-name.reply-author-internal {
+    color: #dc3232 !important;
+    font-weight: 600;
+}
+
+/* Keep analytics charts at a stable height */
+.arkidevs-analytics .arkidevs-chart-container {
+    position: relative;
+    height: 340px;
+    max-height: 360px;
+}
+
+#cancel-reply {
+    margin-left: 10px;
+}

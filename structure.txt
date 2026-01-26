@@ -1,0 +1,88 @@
+arkidevs-support/
+│
+├── arkidevs-support.php          # Main plugin bootstrap file
+├── uninstall.php                 # Cleanup on uninstall
+├── readme.txt                    # Plugin description
+│
+├── assets/
+│   ├── css/
+│   │   ├── admin.css             # Admin & agent dashboard styles
+│   │   ├── customer.css          # Customer dashboard styles
+│   │   └── common.css            # Shared styles
+│   │
+│   ├── js/
+│   │   ├── admin.js              # Agent/admin AJAX logic
+│   │   ├── customer.js           # Customer-side interactivity
+│   │   └── common.js             # Shared JS utilities
+│   │
+│   └── images/
+│
+├── includes/
+│   ├── class-loader.php          # Autoload all plugin classes
+│   ├── class-activator.php       # Activation hooks (roles, tables)
+│   ├── class-deactivator.php
+│
+│   ├── auth/
+│   │   ├── class-roles.php       # Admin, Agent, Customer roles
+│   │   └── class-auth-redirect.php # Role-based login redirects
+│
+│   ├── database/
+│   │   ├── class-db.php          # DB handler & wpdb wrapper
+│   │   ├── class-ticket-table.php
+│   │   ├── class-time-log-table.php
+│   │   └── class-customer-hours-table.php
+│
+│   ├── tickets/
+│   │   ├── class-ticket.php      # Ticket CRUD operations
+│   │   ├── class-priority.php    # Priority logic
+│   │   ├── class-status.php      # Status handling
+│   │   └── class-attachments.php
+│
+│   ├── dashboards/
+│   │   ├── class-agent-dashboard.php
+│   │   ├── class-customer-dashboard.php
+│   │   └── class-admin-dashboard.php
+│
+│   ├── time-tracking/
+│   │   ├── class-timer.php       # Start/stop tracking
+│   │   ├── class-time-calculator.php
+│   │   └── class-time-reports.php
+│
+│   ├── email/
+│   │   ├── class-email-listener.php  # IMAP ticket creation
+│   │   ├── class-email-parser.php
+│   │   └── class-email-replies.php
+│
+│   ├── ajax/
+│   │   ├── class-ticket-ajax.php
+│   │   ├── class-time-ajax.php
+│   │   └── class-dashboard-ajax.php
+│
+│   ├── api/
+│   │   └── class-rest-api.php     # Optional REST endpoints
+│
+│   └── helpers/
+│       ├── class-utils.php
+│       ├── class-security.php
+│       └── class-logger.php
+│
+├── templates/
+│   ├── agent/
+│   │   ├── dashboard.php
+│   │   ├── ticket-list.php
+│   │   └── ticket-view.php
+│   │
+│   ├── customer/
+│   │   ├── dashboard.php
+│   │   ├── ticket-create.php
+│   │   └── ticket-view.php
+│   │
+│   └── emails/
+│       ├── ticket-created.php
+│       ├── ticket-updated.php
+│       └── ticket-closed.php
+│
+├── languages/
+│   └── arkidevs-support.pot
+│
+└── vendor/                        # Composer libraries (IMAP, QR, etc.)

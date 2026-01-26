@@ -1,0 +1,89 @@
+/**
+ * Common styles for Arkidevs Support
+ */
+
+/* Status badges */
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-open {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.status-in-progress {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+.status-pending {
+    background: #fce4ec;
+    color: #c2185b;
+}
+
+.status-closed {
+    background: #e8f5e9;
+    color: #388e3c;
+}
+
+.status-resolved {
+    background: #e1f5fe;
+    color: #0277bd;
+}
+
+.status-archived {
+    background: #eeeeee;
+    color: #616161;
+}
+
+.status-merged {
+    background: #eeeeee;
+    color: #616161;
+}
+
+/* Priority badges */
+.priority-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.priority-low {
+    background: #e8f5e9;
+    color: #388e3c;
+}
+
+.priority-medium {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+.priority-high {
+    background: #ffe0b2;
+    color: #f57c00;
+}
+
+.priority-critical {
+    background: #ffcdd2;
+    color: #d32f2f;
+}
+
+/* Common utilities */
+.hidden {
+    display: none !important;
+}
+
+.arkidevs-clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
