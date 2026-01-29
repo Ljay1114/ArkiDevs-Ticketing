@@ -365,6 +365,48 @@ class Arkidevs_Support_Activator {
             KEY resolution_met (resolution_met)
         ) $charset_collate;";
         dbDelta( $sla_tracking_sql );
+
+        // Escalation rules table
+        $escalation_rules_table = $wpdb->prefix . 'arkidevs_escalation_rules';
+        $escalation_rules_sql = "CREATE TABLE IF NOT EXISTS {$escalation_rules_table} (
+            id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+            name varchar(255) NOT NULL,
+            trigger_type varchar(50) NOT NULL COMMENT 'time, priority, inactivity',
+            trigger_value int(11) UNSIGNED NOT NULL COMMENT 'Hours or priority level',
+            priority_filter varchar(50) DEFAULT NULL COMMENT 'Filter by priority (optional)',
+            status_filter varchar(50) DEFAULT NULL COMMENT 'Filter by status (optional)',
+            action_type varchar(50) NOT NULL COMMENT 'notify, assign, priority_change',
+            action_value varchar(255) DEFAULT NULL COMMENT 'Supervisor ID, new priority, etc.',
+            enabled tinyint(1) UNSIGNED NOT NULL DEFAULT 1,
+            created_at datetime DEFAULT CURRENT_TIMESTAMP,
+            updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            PRIMARY KEY  (id),
+            KEY trigger_type (trigger_type),
+            KEY enabled (enabled),
+            KEY priority_filter (priority_filter),
+            KEY status_filter (status_filter)
+        ) $charset_collate;";
+        dbDelta( $escalation_rules_sql );
+
+        // Escalation history table
+        $escalation_history_table = $wpdb->prefix . 'arkidevs_escalation_history';
+        $escalation_history_sql = "CREATE TABLE IF NOT EXISTS {$escalation_history_table} (
+            id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+            ticket_id bigint(20) UNSIGNED NOT NULL,
+            escalation_rule_id bigint(20) UNSIGNED NOT NULL,
+            trigger_type varchar(50) NOT NULL,
+            trigger_value int(11) UNSIGNED NOT NULL,
+            action_type varchar(50) NOT NULL,
+            action_value varchar(255) DEFAULT NULL,
+            previous_priority varchar(50) DEFAULT NULL,
+            previous_agent_id bigint(20) UNSIGNED DEFAULT NULL,
+            escalated_at datetime DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY  (id),
+            KEY ticket_id (ticket_id),
+            KEY escalation_rule_id (escalation_rule_id),
+            KEY escalated_at (escalated_at)
+        ) $charset_collate;";
+        dbDelta( $escalation_history_sql );
     }
 }
 

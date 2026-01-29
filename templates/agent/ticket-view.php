@@ -17,6 +17,8 @@ require_once ARKIDEVS_SUPPORT_PLUGIN_DIR . 'includes/helpers/class-utils.php';
 require_once ARKIDEVS_SUPPORT_PLUGIN_DIR . 'includes/time-tracking/class-timer.php';
 require_once ARKIDEVS_SUPPORT_PLUGIN_DIR . 'includes/time-tracking/class-time-calculator.php';
 require_once ARKIDEVS_SUPPORT_PLUGIN_DIR . 'includes/audit/class-audit-log.php';
+require_once ARKIDEVS_SUPPORT_PLUGIN_DIR . 'includes/escalation/class-escalation-engine.php';
+require_once ARKIDEVS_SUPPORT_PLUGIN_DIR . 'includes/escalation/class-escalation-rule.php';
 
 $ticket_id = isset( $_GET['ticket_id'] ) ? intval( $_GET['ticket_id'] ) : 0;
 $ticket = Arkidevs_Support_Ticket::get_ticket( $ticket_id );
@@ -30,6 +32,23 @@ $active_timer = Arkidevs_Support_Timer::get_active_timer( $ticket_id );
 $ticket_time = Arkidevs_Support_Time_Calculator::calculate_ticket_time( $ticket_id );
 $audit_entries = class_exists( 'Arkidevs_Support_Audit_Log' ) ? Arkidevs_Support_Audit_Log::get_by_ticket( $ticket_id, 200 ) : array();
 $relations = class_exists( 'Arkidevs_Support_Ticket_Relations' ) ? Arkidevs_Support_Ticket_Relations::get_relations( $ticket_id ) : array();
+
+// Get escalation history
+global $wpdb;
+$escalation_history_table = Arkidevs_Support_Escalation_Engine::get_history_table_name();
+$escalation_history = array();
+if ( class_exists( 'Arkidevs_Support_Escalation_Engine' ) ) {
+    Arkidevs_Support_Escalation_Engine::ensure_history_table_exists();
+    $escalation_history = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT eh.*, er.name as rule_name FROM {$escalation_history_table} eh
+            LEFT JOIN {$wpdb->prefix}arkidevs_escalation_rules er ON eh.escalation_rule_id = er.id
+            WHERE eh.ticket_id = %d
+            ORDER BY eh.escalated_at DESC",
+            $ticket_id
+        )
+    );
+}
 ?>
 
 <div class="wrap arkidevs-support-agent-ticket">
@@ -63,6 +82,11 @@ $relations = class_exists( 'Arkidevs_Support_Ticket_Relations' ) ? Arkidevs_Supp
             <span class="priority-badge <?php echo esc_attr( Arkidevs_Support_Priority::get_priority_class( $ticket->priority ) ); ?>">
                 <?php echo esc_html( Arkidevs_Support_Priority::get_priority_label( $ticket->priority ) ); ?>
             </span>
+            <?php if ( ! empty( $escalation_history ) ) : ?>
+                <span class="escalation-badge" style="display: inline-block; padding: 4px 8px; margin-left: 10px; background-color: #d32f2f; color: #fff; border-radius: 3px; font-size: 12px; font-weight: 600;">
+                    ⚠ <?php esc_html_e( 'Escalated', 'arkidevs-support' ); ?>
+                </span>
+            <?php endif; ?>
             <?php
             require_once ARKIDEVS_SUPPORT_PLUGIN_DIR . 'includes/tickets/class-tag.php';
             $tags = $ticket->get_tags();
@@ -333,6 +357,57 @@ $relations = class_exists( 'Arkidevs_Support_Ticket_Relations' ) ? Arkidevs_Supp
                     <?php esc_html_e( 'This log tracks status, priority, assignment, ticket edits, and comment edits/deletions.', 'arkidevs-support' ); ?>
                 </p>
             <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ( ! empty( $escalation_history ) ) : ?>
+        <div class="ticket-escalation-history" style="margin-top: 20px; background: #fff; padding: 20px; border: 1px solid #ccd0d4; box-shadow: 0 1px 1px rgba(0,0,0,.04);">
+            <h3><?php esc_html_e( 'Escalation History', 'arkidevs-support' ); ?></h3>
+            <table class="wp-list-table widefat fixed striped">
+                <thead>
+                    <tr>
+                        <th><?php esc_html_e( 'Escalated At', 'arkidevs-support' ); ?></th>
+                        <th><?php esc_html_e( 'Rule', 'arkidevs-support' ); ?></th>
+                        <th><?php esc_html_e( 'Trigger', 'arkidevs-support' ); ?></th>
+                        <th><?php esc_html_e( 'Action', 'arkidevs-support' ); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ( $escalation_history as $escalation ) : ?>
+                        <?php
+                        $trigger_labels = array(
+                            'time'       => __( 'Time', 'arkidevs-support' ),
+                            'priority'   => __( 'Priority', 'arkidevs-support' ),
+                            'inactivity' => __( 'Inactivity', 'arkidevs-support' ),
+                        );
+                        $trigger_label = isset( $trigger_labels[ $escalation->trigger_type ] ) ? $trigger_labels[ $escalation->trigger_type ] : $escalation->trigger_type;
+                        
+                        $action_labels = array(
+                            'notify'         => __( 'Notify Supervisors', 'arkidevs-support' ),
+                            'assign'         => __( 'Assign to Supervisor', 'arkidevs-support' ),
+                            'priority_change' => __( 'Change Priority', 'arkidevs-support' ),
+                        );
+                        $action_label = isset( $action_labels[ $escalation->action_type ] ) ? $action_labels[ $escalation->action_type ] : $escalation->action_type;
+                        
+                        if ( 'assign' === $escalation->action_type && ! empty( $escalation->action_value ) ) {
+                            $supervisor = get_userdata( $escalation->action_value );
+                            if ( $supervisor ) {
+                                $action_label .= ' → ' . esc_html( $supervisor->display_name );
+                            }
+                        } elseif ( 'priority_change' === $escalation->action_type && ! empty( $escalation->action_value ) ) {
+                            $priority_label = Arkidevs_Support_Priority::get_priority_label( $escalation->action_value );
+                            $action_label .= ' → ' . esc_html( $priority_label );
+                        }
+                        ?>
+                        <tr>
+                            <td><?php echo Arkidevs_Support_Utils::format_datetime_with_relative( $escalation->escalated_at ); ?></td>
+                            <td><strong><?php echo esc_html( $escalation->rule_name ? $escalation->rule_name : __( 'Unknown Rule', 'arkidevs-support' ) ); ?></strong></td>
+                            <td><?php echo esc_html( $trigger_label ); ?> (<?php echo esc_html( $escalation->trigger_value ); ?> <?php esc_html_e( 'hours', 'arkidevs-support' ); ?>)</td>
+                            <td><?php echo esc_html( $action_label ); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
     <?php endif; ?>
 

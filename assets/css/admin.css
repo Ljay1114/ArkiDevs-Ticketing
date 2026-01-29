@@ -532,3 +532,377 @@
 #cancel-reply {
     margin-left: 10px;
 }
+
+/* ============================================
+   MOBILE RESPONSIVENESS
+   ============================================ */
+
+/* Touch-friendly buttons and controls (minimum 44x44px) */
+@media (max-width: 768px) {
+    /* Base container adjustments */
+    .arkidevs-support-admin,
+    .arkidevs-support-agent {
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    /* Touch-friendly buttons */
+    .button,
+    button,
+    input[type="button"],
+    input[type="submit"],
+    .button-primary,
+    .button-secondary {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 12px 20px;
+        font-size: 16px; /* Prevents zoom on iOS */
+        line-height: 1.4;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Stats grid - stack on mobile */
+    .arkidevs-stats {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin: 15px 0;
+    }
+
+    .stat-box {
+        padding: 15px;
+    }
+
+    .stat-box .stat-number {
+        font-size: 28px;
+    }
+
+    /* Tabs - scrollable on mobile */
+    .arkidevs-tabs {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        margin: 15px 0;
+        padding-bottom: 0;
+    }
+
+    .arkidevs-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .arkidevs-tabs .tab {
+        padding: 12px 16px;
+        white-space: nowrap;
+        font-size: 15px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Ticket items - full width, better spacing */
+    .arkidevs-ticket-item {
+        padding: 15px;
+        margin-bottom: 12px;
+    }
+
+    .arkidevs-ticket-item .ticket-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .arkidevs-ticket-item .ticket-header h3 {
+        font-size: 15px;
+        line-height: 1.4;
+        word-break: break-word;
+    }
+
+    .arkidevs-ticket-item .ticket-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 13px;
+    }
+
+    /* Ticket actions - stack vertically */
+    .ticket-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .ticket-actions select,
+    .ticket-actions button {
+        width: 100%;
+        min-height: 44px;
+        padding: 12px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+
+    /* Forms - full width inputs */
+    .form-table th,
+    .form-table td {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .form-table th {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .form-table input[type="text"],
+    .form-table input[type="email"],
+    .form-table input[type="number"],
+    .form-table input[type="date"],
+    .form-table input[type="time"],
+    .form-table select,
+    .form-table textarea {
+        width: 100% !important;
+        min-height: 44px;
+        padding: 12px;
+        font-size: 16px; /* Prevents zoom on iOS */
+        box-sizing: border-box;
+    }
+
+    .form-table textarea {
+        min-height: 120px;
+    }
+
+    /* Ticket edit form */
+    .ticket-edit input,
+    .ticket-edit textarea {
+        width: 100%;
+        min-height: 44px;
+        padding: 12px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    .ticket-edit textarea {
+        min-height: 150px;
+    }
+
+    /* Reply form */
+    .reply-form textarea {
+        width: 100%;
+        min-height: 120px;
+        padding: 12px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    /* Tables - horizontal scroll */
+    .wp-list-table,
+    .arkidevs-audit-table,
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+
+    .wp-list-table thead,
+    .wp-list-table tbody,
+    .arkidevs-audit-table thead,
+    .arkidevs-audit-table tbody {
+        display: block;
+    }
+
+    .wp-list-table tr,
+    .arkidevs-audit-table tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    /* Bulk actions bar - stack on mobile */
+    .arkidevs-bulk-actions-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 15px;
+    }
+
+    .arkidevs-bulk-actions-bar label {
+        margin-right: 0;
+        padding: 8px 0;
+    }
+
+    .arkidevs-bulk-actions-bar select,
+    .arkidevs-bulk-actions-bar button {
+        width: 100%;
+        min-height: 44px;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    /* Filter forms - stack on mobile */
+    form[method="get"] > div {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+
+    form[method="get"] > div > div {
+        width: 100% !important;
+        min-width: 100% !important;
+        margin-bottom: 12px;
+    }
+
+    form[method="get"] input[type="text"],
+    form[method="get"] select {
+        width: 100% !important;
+        min-height: 44px;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    form[method="get"] button {
+        width: 100%;
+        margin-top: 0 !important;
+    }
+
+    /* Ticket meta - better mobile layout */
+    .ticket-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .ticket-meta > * {
+        margin-left: 0 !important;
+    }
+
+    /* Nested replies - reduce indentation on mobile */
+    .reply-item.reply-nested {
+        margin-left: 20px;
+        padding-left: 15px;
+    }
+
+    /* Reply actions - larger touch targets */
+    .reply-actions .button-link {
+        min-height: 44px;
+        padding: 8px 12px;
+        display: inline-block;
+        margin: 4px 0;
+    }
+
+    /* Time tracking section */
+    .time-tracking {
+        padding: 15px;
+    }
+
+    /* Description and content sections */
+    .ticket-description,
+    .ticket-audit,
+    .ticket-related,
+    .ticket-edit,
+    .ticket-replies {
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    /* Chart containers - adjust height for mobile */
+    .arkidevs-chart-container {
+        height: 250px !important;
+        max-height: 280px !important;
+    }
+
+    /* Badges - ensure readable size */
+    .status-badge,
+    .priority-badge,
+    .agent-badge {
+        padding: 6px 10px;
+        font-size: 13px;
+        display: inline-block;
+        margin: 4px 4px 4px 0;
+    }
+
+    /* Escalation badge */
+    .escalation-badge {
+        padding: 8px 12px !important;
+        font-size: 13px !important;
+        margin: 8px 0 !important;
+        display: block !important;
+    }
+
+    /* Related tickets list */
+    .arkidevs-related-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px 0;
+    }
+
+    .arkidevs-related-list .button-link.remove-related-ticket {
+        margin-left: 0;
+        min-height: 44px;
+        padding: 8px 12px;
+    }
+
+    /* Audit log details */
+    .arkidevs-audit-details summary {
+        min-height: 44px;
+        padding: 8px 0;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Checkboxes - larger touch targets */
+    input[type="checkbox"],
+    input[type="radio"] {
+        width: 20px;
+        height: 20px;
+        margin: 0 8px 0 0;
+    }
+
+    /* Select dropdowns - full width */
+    select {
+        width: 100%;
+        min-height: 44px;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    /* Links - ensure adequate spacing */
+    a {
+        padding: 4px 0;
+        min-height: 32px;
+        display: inline-block;
+    }
+
+    /* Hide less important elements on mobile */
+    .ticket-date {
+        font-size: 12px;
+    }
+}
+
+/* Very small screens (phones in portrait) */
+@media (max-width: 480px) {
+    .arkidevs-support-admin,
+    .arkidevs-support-agent {
+        padding: 8px;
+    }
+
+    .stat-box .stat-number {
+        font-size: 24px;
+    }
+
+    .arkidevs-ticket-item {
+        padding: 12px;
+    }
+
+    .ticket-description,
+    .ticket-audit,
+    .ticket-related,
+    .ticket-edit,
+    .ticket-replies {
+        padding: 12px;
+    }
+
+    .arkidevs-chart-container {
+        height: 200px !important;
+        max-height: 220px !important;
+    }
+}

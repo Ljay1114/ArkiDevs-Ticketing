@@ -119,6 +119,11 @@ class Arkidevs_Support_Loader {
         require_once ARKIDEVS_SUPPORT_PLUGIN_DIR . 'includes/sla/class-sla-admin.php';
         require_once ARKIDEVS_SUPPORT_PLUGIN_DIR . 'includes/sla/class-sla-reports.php';
 
+        // Escalation management
+        require_once ARKIDEVS_SUPPORT_PLUGIN_DIR . 'includes/escalation/class-escalation-rule.php';
+        require_once ARKIDEVS_SUPPORT_PLUGIN_DIR . 'includes/escalation/class-escalation-engine.php';
+        require_once ARKIDEVS_SUPPORT_PLUGIN_DIR . 'includes/escalation/class-escalation-admin.php';
+
         // Analytics
         require_once ARKIDEVS_SUPPORT_PLUGIN_DIR . 'includes/analytics/class-analytics.php';
 
@@ -161,8 +166,14 @@ class Arkidevs_Support_Loader {
         // Initialize SLA management
         Arkidevs_Support_SLA_Admin::get_instance();
 
+        // Initialize escalation management
+        Arkidevs_Support_Escalation_Admin::get_instance();
+
         // Initialize customer hours management
         Arkidevs_Support_Customer_Hours_Admin::get_instance();
+
+        // Set up escalation cron job
+        $this->setup_escalation_cron();
 
         // Initialize AJAX handlers
         Arkidevs_Support_Ticket_Ajax::get_instance();
@@ -401,6 +412,27 @@ class Arkidevs_Support_Loader {
             ARKIDEVS_SUPPORT_VERSION,
             true
         );
+    }
+
+    /**
+     * Set up escalation cron job
+     */
+    private function setup_escalation_cron() {
+        // Schedule escalation check if not already scheduled
+        if ( ! wp_next_scheduled( 'arkidevs_check_escalations' ) ) {
+            wp_schedule_event( time(), 'hourly', 'arkidevs_check_escalations' );
+        }
+
+        // Hook the escalation check
+        add_action( 'arkidevs_check_escalations', array( $this, 'run_escalation_check' ) );
+    }
+
+    /**
+     * Run escalation check (called by cron)
+     */
+    public function run_escalation_check() {
+        require_once ARKIDEVS_SUPPORT_PLUGIN_DIR . 'includes/escalation/class-escalation-engine.php';
+        Arkidevs_Support_Escalation_Engine::process_escalations();
     }
 
     /**

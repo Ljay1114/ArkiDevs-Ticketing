@@ -86,6 +86,7 @@ class Arkidevs_Support_Email_Preferences {
                 'agent_new_ticket'      => true,
                 'agent_customer_reply'  => true,
                 'agent_assignment'      => true,
+                'agent_escalation'      => true,
             );
         }
 

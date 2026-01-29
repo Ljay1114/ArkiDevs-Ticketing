@@ -283,26 +283,243 @@
     margin-top: 8px;
 }
 
-/* Responsive */
+/* ============================================
+   MOBILE RESPONSIVENESS
+   ============================================ */
+
 @media (max-width: 768px) {
+    /* Base container adjustments */
     .arkidevs-support-public-wrapper {
         padding: 10px;
+        margin: 20px auto;
     }
 
     .arkidevs-support-container {
         padding: 20px;
+        border-radius: 4px;
+    }
+
+    .arkidevs-support-customer {
+        padding: 0 10px;
+    }
+
+    /* Touch-friendly buttons */
+    .button,
+    button,
+    input[type="button"],
+    input[type="submit"],
+    .button-primary,
+    .button-secondary {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 12px 20px;
+        font-size: 16px; /* Prevents zoom on iOS */
+        line-height: 1.4;
+        width: 100%;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Customer hours summary */
+    .customer-hours-summary {
+        padding: 15px;
+        margin-bottom: 20px;
     }
 
     .hours-stats {
         grid-template-columns: 1fr;
+        gap: 15px;
+        margin-top: 15px;
     }
 
+    .hours-box {
+        padding: 15px;
+    }
+
+    .hours-box span {
+        font-size: 22px;
+    }
+
+    /* Create ticket section */
+    .create-ticket-section {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    /* Forms - full width, touch-friendly */
+    #ticket-form input,
+    #ticket-form select,
+    #ticket-form textarea {
+        width: 100%;
+        min-height: 44px;
+        padding: 12px;
+        margin-bottom: 15px;
+        font-size: 16px; /* Prevents zoom on iOS */
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    #ticket-form textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    #ticket-form label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        font-size: 15px;
+    }
+
+    #ticket-form p {
+        margin-bottom: 15px;
+    }
+
+    /* Tickets list */
+    .tickets-list {
+        padding: 15px;
+        overflow-x: auto;
+    }
+
+    /* Tables - horizontal scroll on mobile */
     .tickets-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
         font-size: 14px;
+    }
+
+    .tickets-table thead,
+    .tickets-table tbody {
+        display: block;
+    }
+
+    .tickets-table tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
     }
 
     .tickets-table th,
     .tickets-table td {
+        padding: 10px 8px;
+        word-wrap: break-word;
+    }
+
+    .tickets-table th {
+        font-size: 13px;
+    }
+
+    /* Search and filter forms */
+    form[method="get"] {
+        padding: 15px !important;
+    }
+
+    form[method="get"] > div {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+    }
+
+    form[method="get"] > div > div {
+        width: 100% !important;
+        min-width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+
+    form[method="get"] input[type="text"],
+    form[method="get"] select {
+        width: 100% !important;
+        min-height: 44px;
+        padding: 12px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    form[method="get"] button {
+        width: 100%;
+        margin-top: 0 !important;
+    }
+
+    /* Reply items - reduce indentation */
+    .reply-item.reply-nested {
+        margin-left: 15px;
+        padding-left: 12px;
+    }
+
+    .reply-author {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .reply-actions .button-link {
+        min-height: 44px;
+        padding: 8px 12px;
+        display: inline-block;
+        margin: 4px 4px 4px 0;
+    }
+
+    /* Login required section */
+    .arkidevs-support-login-required {
+        padding: 30px 15px;
+        margin: 15px 0;
+    }
+
+    /* Checkboxes and radios - larger touch targets */
+    input[type="checkbox"],
+    input[type="radio"] {
+        width: 20px;
+        height: 20px;
+        margin: 0 8px 0 0;
+    }
+
+    /* Links - adequate spacing */
+    a {
+        padding: 4px 0;
+        min-height: 32px;
+        display: inline-block;
+    }
+
+    /* Status and priority badges */
+    .status-badge,
+    .priority-badge {
+        padding: 6px 10px;
+        font-size: 13px;
+        display: inline-block;
+        margin: 4px 4px 4px 0;
+    }
+}
+
+/* Very small screens (phones in portrait) */
+@media (max-width: 480px) {
+    .arkidevs-support-public-wrapper {
         padding: 8px;
+        margin: 15px auto;
+    }
+
+    .arkidevs-support-container {
+        padding: 15px;
+    }
+
+    .customer-hours-summary,
+    .create-ticket-section,
+    .tickets-list {
+        padding: 12px;
+    }
+
+    .hours-box span {
+        font-size: 20px;
+    }
+
+    .tickets-table {
+        font-size: 13px;
+    }
+
+    .tickets-table th,
+    .tickets-table td {
+        padding: 8px 6px;
     }
 }
